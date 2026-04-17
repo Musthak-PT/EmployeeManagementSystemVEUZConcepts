@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f5f7fb;
+}
+
+.app-layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 230px;
+  min-height: 100vh;
+  background: #111827;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 25px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  margin: 12px 0;
+  text-decoration: none;
+}
+
+.sidebar button {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #eef2ff;
+}
+
+.auth-card {
+  width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 220px;
+}
+
+.table {
+  width: 100%;
+  background: white;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}

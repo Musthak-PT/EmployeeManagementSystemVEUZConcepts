@@ -160,3 +160,8 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30), # Token used for API access will expire in 30 minutes
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7), # Refresh token: used to generate new access tokens, valid for 7 days
 }
+
+#Allow react
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]

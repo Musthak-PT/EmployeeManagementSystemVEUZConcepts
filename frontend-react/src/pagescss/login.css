@@ -1,0 +1,134 @@
+/* Full screen center */
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  font-family: Arial, sans-serif;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Title */
+.title {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Inputs */
+.input {
+  width: 100%; 
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Input focus effect */
+.input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 5px rgba(79, 70, 229, 0.5);
+}
+
+/* Button */
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+/* Button hover */
+.btn:hover {
+  background: #4338ca;
+  transform: scale(1.03);
+}
+
+/* Button click */
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Link text */
+.link-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Link style */
+.link-text a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link-text a:hover {
+  text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.register-link {
+  text-decoration: none;
+}
+
+.no_account{
+    color: #525452;
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+/* Make toast container relative */
+.Toastify__toast {
+  position: relative;
+  padding-right: 30px; /* space for X */
+}
+
+/* Move close button to top-right */
+.Toastify__close-button {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+
+  font-size: 12px;      /* small */
+  background: transparent;
+  border: none;
+
+  color: #555;
+  opacity: 0.7;
+}
+
+/* Hover effect */
+.Toastify__close-button:hover {
+  opacity: 1;
+  color: #000;
+}
+
