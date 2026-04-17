@@ -113,3 +113,37 @@
 .empty-state p {
   opacity: 0.8;
 }
+
+
+
+/* Search */
+.search-wrapper {
+  display: flex;
+  justify-content: flex-end;  /* pushes to right */
+  margin: 15px 0;
+}
+
+.search-box {
+  width: 280px;              /* fixed width looks better on right */
+  padding: 10px 35px 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  position: relative;
+}
+
+/* container for icon */
+.search-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* icon inside input */
+.search-icon i {
+  position: absolute;
+  right: 10px;
+  color: #8b2323;
+  pointer-events: none;
+}
