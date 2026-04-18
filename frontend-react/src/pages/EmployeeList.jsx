@@ -1,181 +1,7 @@
-// // import { useEffect, useState } from "react";
-// // import api from "../api/axios";
-// // import { toast } from "react-toastify";
-// // import { useNavigate } from "react-router-dom";
-// // import "../pagescss/employeelist.css";
-
-// // export default function EmployeeList() {
-// //   const [list, setList] = useState([]);
-// //   const navigate = useNavigate();
-
-// //   const load = async () => {
-// //     try {
-// //       const res = await api.get("employees/");
-// //       setList(res.data.data || []);
-// //     } catch (err) {
-// //       toast.error("Failed to load employees");
-// //     }
-// //   };
-
-// //   useEffect(() => {
-// //     load();
-// //   }, []);
-
-// //   const remove = async (id) => {
-// //     try {
-// //       await api.delete(`employees/${id}/delete/`);
-// //       toast.success("Deleted successfully");
-// //       load();
-// //     } catch (err) {
-// //       toast.error("Delete failed");
-// //     }
-// //   };
-
-// //   return (
-// //     <div className="emp-list-container">
-// //       <h2>Employees</h2>
-
-// //       {/* EMPTY STATE */}
-// //       {list.length === 0 ? (
-// //         <div className="empty-state">
-// //           <h3>No Employees Found</h3>
-// //           <p>Create your first employee to see it here</p>
-// //         </div>
-// //       ) : (
-// //         <div className="grid">
-// //           {list.map((item) => (
-// //             <div key={item.id} className="card">
-// //               <h3>{item.form_title}</h3>
-
-// //               <div className="values">
-// //                 {item.values.map((v, i) => (
-// //                   <p key={i}>
-// //                     <span>{v.label}:</span> {v.value}
-// //                   </p>
-// //                 ))}
-// //               </div>
-
-// //               <div className="actions">
-// //                 <button
-// //                   className="view"
-// //                   onClick={() =>
-// //                     navigate(`/employees/view/${item.id}`)
-// //                   }
-// //                 >
-// //                   View
-// //                 </button>
-
-// //                 <button
-// //                   className="edit"
-// //                   onClick={() =>
-// //                     navigate(`/employees/edit/${item.id}`)
-// //                   }
-// //                 >
-// //                   Edit
-// //                 </button>
-
-// //                 <button
-// //                   className="delete"
-// //                   onClick={() => remove(item.id)}
-// //                 >
-// //                   Delete
-// //                 </button>
-// //               </div>
-// //             </div>
-// //           ))}
-// //         </div>
-// //       )}
-// //     </div>
-// //   );
-// // }
-
-// import { useEffect, useState } from "react";
-// import api from "../api/axios";
-// import { toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
-// import "../pagescss/employeelist.css";
-
-// export default function EmployeeList() {
-//   const [list, setList] = useState([]);
-//   const navigate = useNavigate();
-
-//   const load = async () => {
-//     try {
-//       const res = await api.get("employees/");
-//       setList(res.data.data || []);
-//     } catch (err) {
-//       toast.error("Failed to load employees");
-//     }
-//   };
-
-//   useEffect(() => {
-//     load();
-//   }, []);
-
-//   const remove = async (id) => {
-//     try {
-//       await api.delete(`employees/${id}/delete/`);
-//       toast.success("Deleted successfully");
-//       load();
-//     } catch (err) {
-//       toast.error("Delete failed");
-//     }
-//   };
-
-//   return (
-//     <div className="emp-list-container">
-//       <h2>Employees</h2>
-
-//       {list.length === 0 ? (
-//         <div className="empty-state">
-//           <h3>No Employees Found</h3>
-//           <p>Create your first employee to see it here</p>
-//         </div>
-//       ) : (
-//         <div className="grid">
-//           {list.map((item) => (
-//             <div key={item.id} className="card">
-//               <h3>{item.form_title}</h3>
-
-//               <div className="values">
-//                 {item.values.map((v, i) => (
-//                   <p key={i}>
-//                     <span>{v.label}:</span> {v.value}
-//                   </p>
-//                 ))}
-//               </div>
-
-//               <div className="actions">
-
-//                 {/* EDIT ONLY */}
-//                 <button
-//                   className="edit"
-//                   onClick={() =>
-//                     navigate(`/employees/edit/${item.id}`)
-//                   }
-//                 >
-//                   Edit
-//                 </button>
-
-//                 <button
-//                   className="delete"
-//                   onClick={() => remove(item.id)}
-//                 >
-//                   Delete
-//                 </button>
-
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../pagescss/employeelist.css";
 
 export default function EmployeeList() {
@@ -226,18 +52,40 @@ export default function EmployeeList() {
 
   return (
     <div className="emp-list-container">
+
+      <Link to="/dashboard" className="dashboard-link-employee">
+          ⬅ Back to Dashboard
+      </Link>
+
       <h2>Employees</h2>
 
       {/* ===============================
           🔍 SEARCH INPUT (NEW)
       =============================== */}
-      <input
-        type="text"
-        placeholder="Search by title, label and value..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="search-box"
-      />
+      <div className="search-container">
+        {/* <span className="search-icon-left">🔍</span> */}
+        <svg 
+          className="search-icon-left" 
+          viewBox="0 0 24 24" 
+          width="20" 
+          height="20" 
+          fill="none" 
+          stroke="#999" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          placeholder="Search by title, label and value..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="search-box"
+        />
+      </div>
 
       {filteredList.length === 0 ? (
         <div className="empty-state">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
 import { toast } from "react-toastify";
 import "../pagescss/formbuilder.css";
@@ -72,6 +72,11 @@ export default function EmployeeEdit() {
   return (
     <div className="form-container">
       <div className="form-card">
+
+        <Link to="/dashboard" className="dashboard-link">
+          ⬅ Back to Dashboard
+        </Link>
+
         <h2>Edit Employee</h2>
 
         {fields.map((field, index) => {

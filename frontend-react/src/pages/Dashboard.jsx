@@ -1,10 +1,45 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../api/axios";
 import "../pagescss/dashboard.css";
 
 export default function Dashboard() {
-  const user = {
-    username: "musthak",
-    email: "musthak@gmail.com",
+
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    username: "Nil",
+    email: "Nil",
+  });
+  // ✅ FETCH PROFILE
+  const loadProfile = async () => {
+    try {
+      const res = await api.get("accounts/profile/");
+
+      if (res.data.success) {
+        setUser({
+          username: res.data.data.username || "Nil",
+          email: res.data.data.email || "Nil",
+        });
+      }
+    } catch (err) {
+      console.log("Profile load failed", err);
+      setUser({
+        username: "Nil",
+        email: "Nil",
+      });
+    }
+  };
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
+  // Logout 
+  const handleLogout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+
+    navigate("/", { replace: true }); // prevents back button
   };
 
   return (
@@ -32,6 +67,7 @@ export default function Dashboard() {
             <p className="subtitle">
               Welcome back 👋 Manage everything below
             </p>
+
           </div>
 
         </div>
@@ -49,6 +85,21 @@ export default function Dashboard() {
           <Link to="/employees" className="dash-box">
             📋 Employee List
           </Link>
+        </div>
+
+
+        <div className="logout-wrapper">
+          
+
+        {/* Change password */}
+          <Link to="/change-password" className="logout-link">
+              Change Password
+          </Link>
+
+          <button onClick={handleLogout} className="logout-link">
+            Logout
+          </button>
+        
         </div>
 
       </div>

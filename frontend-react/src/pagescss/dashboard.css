@@ -131,6 +131,39 @@
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
 
+/* FORCE GROUP TO RIGHT */
+.logout-wrapper {
+  display: flex;
+  justify-content: flex-end; /* Pushes the whole group to the right side */
+  align-items: center;
+  margin-top: 30px;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* FORCE BUTTONS TO BE NARROW AND CLOSE */
+.logout-link {
+  display: inline-block;
+  width: auto;         /* IMPORTANT: Prevents the button from filling space */
+  flex: 0 0 auto;      /* IMPORTANT: Stops it from growing/stretching */
+  white-space: nowrap; /* Keeps 'Change Password' on one line */
+  margin: 0 0 0 20px;  /* Creates exactly 20px gap on the left of each item */
+  padding: 0;
+  background: none;
+  border: none;
+  color: #6761cf;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logout-link:hover {
+  color: #252085;
+  text-decoration: underline; /* Optional: adds clarity on hover */
+}
+
 /* =========================
    RESPONSIVE
 ========================= */
@@ -155,3 +188,4 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
