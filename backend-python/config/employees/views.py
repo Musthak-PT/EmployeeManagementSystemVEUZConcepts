@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.db.models import Q
 from .models import Employee
 from .serializers import EmployeeSerializer
-
+from .pagination import EmployeePagination
 
 """
 Create Employee
@@ -43,12 +43,14 @@ class EmployeeCreateView(APIView):
 List Employees
 Search by label / value
 """
+
 class EmployeeListView(APIView):
 
     def get(self, request):
         search = request.GET.get("search", "").strip()
+
         queryset = Employee.objects.filter(
-            form__user=request.user  # ✅ correct ownership filtering
+            form__user=request.user
         ).select_related(
             "form"
         ).prefetch_related(
@@ -64,19 +66,19 @@ class EmployeeListView(APIView):
 
         queryset = queryset.distinct().order_by("-id")
 
-        serializer = EmployeeSerializer(
-            queryset,
-            many=True
-        )
+        # ✅ PAGINATION ADDED HERE
+        paginator = EmployeePagination()
+        page = paginator.paginate_queryset(queryset, request)
 
-        return Response(
-            {
-                "success": True,
-                "count": queryset.count(),
-                "data": serializer.data
-            },
-            status=status.HTTP_200_OK
-        )
+        serializer = EmployeeSerializer(page, many=True)
+
+        return paginator.get_paginated_response({
+            "success": True,
+            "count": queryset.count(),
+            "data": serializer.data
+        })
+
+
 
 
 """
