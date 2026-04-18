@@ -5,65 +5,75 @@ import { useNavigate, Link } from "react-router-dom";
 import "../pagescss/employeelist.css";
 
 export default function EmployeeList() {
+
   const [list, setList] = useState([]);
   const [search, setSearch] = useState("");
+
+  // pagination
+  const [page, setPage] = useState(1);
+  const [next, setNext] = useState(null);
+  const [previous, setPrevious] = useState(null);
+
   const navigate = useNavigate();
 
-  const load = async () => {
+  // =========================
+  // LOAD EMPLOYEES
+  // =========================
+  const load = async (pageNumber = 1) => {
     try {
-      const res = await api.get("employees/");
-      setList(res.data.data || []);
+      const res = await api.get(
+        `employees/?page=${pageNumber}&search=${search}`
+      );
+
+      // ✅ FIX: correct path is results.data
+      setList(res.data.results?.data || []);
+      setNext(res.data.next);
+      setPrevious(res.data.previous);
+      setPage(pageNumber);
+
     } catch (err) {
+      console.log(err);
       toast.error("Failed to load employees");
     }
   };
 
   useEffect(() => {
-    load();
+    load(1);
   }, []);
 
+  // =========================
+  // DELETE EMPLOYEE
+  // =========================
   const remove = async (id) => {
     try {
       await api.delete(`employees/${id}/delete/`);
       toast.success("Deleted successfully");
-      load();
+      load(page);
     } catch (err) {
       toast.error("Delete failed");
     }
   };
 
-  // ===============================
-  // 🔍 SEARCH FILTER LOGIC
-  // ===============================
-  const filteredList = list.filter((item) => {
-    const keyword = search.toLowerCase();
-
-    // search in form title
-    if (item.form_title?.toLowerCase().includes(keyword)) {
-      return true;
-    }
-
-    // search in dynamic values
-    return item.values?.some((v) =>
-      v.label?.toLowerCase().includes(keyword) ||
-      v.value?.toLowerCase().includes(keyword)
-    );
-  });
+  // =========================
+  // SEARCH
+  // =========================
+  const handleSearch = (value) => {
+    setSearch(value);
+    load(1);
+  };
 
   return (
     <div className="emp-list-container">
 
+      {/* BACK */}
       <Link to="/dashboard" className="dashboard-link-employee">
-          ⬅ Back to Dashboard
+        ⬅ Back to Dashboard
       </Link>
 
       <h2>Employees</h2>
 
-      {/* ===============================
-          🔍 SEARCH INPUT (NEW)
-      =============================== */}
+      {/* SEARCH */}
       <div className="search-container">
-        {/* <span className="search-icon-left">🔍</span> */}
         <svg 
           className="search-icon-left" 
           viewBox="0 0 24 24" 
@@ -82,50 +92,75 @@ export default function EmployeeList() {
           type="text"
           placeholder="Search by title, label and value..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => handleSearch(e.target.value)}
           className="search-box"
         />
       </div>
 
-      {filteredList.length === 0 ? (
+      {/* EMPTY STATE */}
+      {list.length === 0 ? (
         <div className="empty-state">
           <h3>No Employees Found</h3>
-          <p>Try changing search keywords</p>
+          <p>Create or change search keyword</p>
         </div>
       ) : (
-        <div className="grid">
-          {filteredList.map((item) => (
-            <div key={item.id} className="card">
-              <h3>{item.form_title}</h3>
+        <>
+          {/* GRID */}
+          <div className="grid">
+            {list.map((item) => (
+              <div key={item.id} className="card">
+                <h3>{item.form_title}</h3>
 
-              <div className="values">
-                {item.values.map((v, i) => (
-                  <p key={i}>
-                    <span>{v.label}:</span> {v.value}
-                  </p>
-                ))}
+                <div className="values">
+                  {item.values.map((v, i) => (
+                    <p key={i}>
+                      <span>{v.label}:</span> {v.value}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="actions">
+                  <button
+                    className="edit"
+                    onClick={() =>
+                      navigate(`/employees/edit/${item.id}?page=${page}`)
+                    }
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="delete"
+                    onClick={() => remove(item.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
+            ))}
+          </div>
 
-              <div className="actions">
-                <button
-                  className="edit"
-                  onClick={() =>
-                    navigate(`/employees/edit/${item.id}`)
-                  }
-                >
-                  Edit
-                </button>
+          {/* PAGINATION */}
+          <div className="pagination">
 
-                <button
-                  className="delete"
-                  onClick={() => remove(item.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            <button
+              disabled={!previous}
+              onClick={() => load(page - 1)}
+            >
+              ⬅ Prev
+            </button>
+
+            <span>Page {page}</span>
+
+            <button
+              disabled={!next}
+              onClick={() => load(page + 1)}
+            >
+              Next ➡
+            </button>
+
+          </div>
+        </>
       )}
     </div>
   );
