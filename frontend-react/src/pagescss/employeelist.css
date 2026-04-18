@@ -117,33 +117,46 @@
 
 
 /* Search */
-.search-wrapper {
-  display: flex;
-  justify-content: flex-end;  /* pushes to right */
-  margin: 15px 0;
-}
-
-.search-box {
-  width: 280px;              /* fixed width looks better on right */
-  padding: 10px 35px 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  outline: none;
-  font-size: 14px;
+/* Container to handle centering and icon positioning */
+.search-container {
   position: relative;
-}
-
-/* container for icon */
-.search-icon {
-  position: relative;
+  width: 100%;
+  max-width: 600px; /* Adjust width to match your preference */
+  margin: 20px auto; /* Centers the container and adds spacing below "Employees" */
   display: flex;
   align-items: center;
 }
 
-/* icon inside input */
-.search-icon i {
+.search-box {
+  width: 100%;
+  padding: 12px 15px 12px 45px; /* Extra left padding to make room for the icon */
+  border: 1px solid #ddd;
+  border-radius: 50px; /* Fully rounded corners like your reference image */
+  outline: none;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* The Search Icon */
+.search-icon-left {
   position: absolute;
-  right: 10px;
-  color: #8b2323;
+  left: 15px; /* Positions icon inside the left end of the bar */
+  color: #040404;
+  font-size: 18px;
   pointer-events: none;
+}
+
+
+.dashboard-link-employee {
+  display: inline-block;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: #ffffff;;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.dashboard-link-employee:hover {
+  color: #4338ca;
+  transform: translateX(-3px);
 }

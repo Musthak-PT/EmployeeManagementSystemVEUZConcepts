@@ -3,7 +3,7 @@ import api from "../api/axios";
 import "../pagescss/formbuilder.css";
 
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import {
   DndContext,
@@ -52,7 +52,7 @@ function SortableField({ field, index, fields, setFields }) {
       </span>
 
       <input
-        placeholder="Label"
+        placeholder="Enter Label"
         value={field.label}
         onChange={(e) => updateField("label", e.target.value)}
       />
@@ -61,6 +61,9 @@ function SortableField({ field, index, fields, setFields }) {
         value={field.field_type}
         onChange={(e) => updateField("field_type", e.target.value)}
       >
+        <option value="" disabled>
+          Select Option
+        </option>
         <option value="text">Text</option>
         <option value="textarea">Textarea</option>
         <option value="number">Number</option>
@@ -89,7 +92,7 @@ export default function FormBuilder() {
       ...fields,
       {
         label: "",
-        field_type: "text",
+        field_type: "",
         order: fields.length + 1,
         is_required: true,
         placeholder: "",
@@ -151,6 +154,14 @@ export default function FormBuilder() {
   return (
     <div className="form-container">
       <div className="form-card">
+
+
+        {/* ✅ CHANGE 2: DASHBOARD LINK ADDED HERE */}
+        <Link to="/dashboard" className="dashboard-link">
+          ⬅ Back to Dashboard
+        </Link>
+
+
         <h2>Create Dynamic Form</h2>
 
         <input

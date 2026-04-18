@@ -8,11 +8,13 @@ import EmployeeCreate from "./pages/EmployeeCreate";
 import EmployeeList from "./pages/EmployeeList";
 import Profile from "./pages/Profile";
 import EmployeeEdit from "./pages/EmployeeEdit";
+import ChangePassword from "./pages/ChangePassword";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />

@@ -47,12 +47,13 @@ class EmployeeListView(APIView):
 
     def get(self, request):
         search = request.GET.get("search", "").strip()
-
-        queryset = Employee.objects.select_related(
+        queryset = Employee.objects.filter(
+            form__user=request.user  # ✅ correct ownership filtering
+        ).select_related(
             "form"
         ).prefetch_related(
             "values"
-        ).all()
+        )
 
         if search:
             queryset = queryset.filter(

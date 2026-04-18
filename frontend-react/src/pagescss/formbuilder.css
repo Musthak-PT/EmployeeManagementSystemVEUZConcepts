@@ -114,3 +114,17 @@
   margin-bottom: 12px;
   align-items: center;
 }
+
+.dashboard-link {
+  display: inline-block;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: #667eea;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.dashboard-link:hover {
+  color: #4338ca;
+  transform: translateX(-3px);
+}

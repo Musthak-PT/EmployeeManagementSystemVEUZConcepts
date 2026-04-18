@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../pagescss/employeecreate.css";
 
 export default function EmployeeCreate() {
@@ -80,6 +80,11 @@ export default function EmployeeCreate() {
   return (
     <div className="emp-container">
       <div className="emp-card">
+
+        <Link to="/dashboard" className="dashboard-link">
+          ⬅ Back to Dashboard
+        </Link>
+        
         <h2>Create Employee</h2>
 
         {/* FORM SELECT */}

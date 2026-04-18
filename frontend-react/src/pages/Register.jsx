@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "../pagescss/login.css";
 
@@ -100,6 +100,16 @@ export default function Register() {
         />
 
         <button onClick={submit}>Register</button>
+
+        {/* ✅ LOGIN LINK ADDED HERE */}
+        <p className="no_account">
+          Already have an account?{" "}
+          <Link to="/" className="register-link">
+            Login
+          </Link>
+        </p>
+
+
       </div>
     </div>
   );
